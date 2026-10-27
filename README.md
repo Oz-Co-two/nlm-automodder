@@ -14,7 +14,7 @@ NLM 本体には同梱していません。必要な人だけが取り込みま�
 
 ## 使い方
 
-- **必要なもの**: 譜面チェックに「AutoModder」のタブがある NLM（Windows 版）。**このタブは NLM の v2.0.0-oz の次の版で入る予定で、まだ公開していません。**
+- **必要なもの**: 譜面チェックに「AutoModder」のタブがある NLM（Windows 版）。**このタブは [NLM v2.1.0-oz](https://github.com/Oz-Co-two/nlm-oz-co2/releases/tag/v2.1.0-oz) 以降に入っています。**
   プラグインは Windows（64bit）専用です。.NET のインストールは不要です（同梱しています）。
 - **取り込み**: NLM の「譜面チェック（BeatLeader基準）」のパネルの 3 つ目のタブ「AutoModder」を開き、「📥 プラグインを取り込む…」→「GitHub から取り込む」を押します。
   この GitHub Releases から約 12MB をダウンロードし、ファイルが配布元の情報（`manifest.json` の SHA-256・大きさ）と一致することを確かめてから、
