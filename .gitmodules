@@ -1,0 +1,3 @@
+[submodule "external/ChroMapper-AutoModder"]
+	path = external/ChroMapper-AutoModder
+	url = https://github.com/LightAi39/ChroMapper-AutoModder.git

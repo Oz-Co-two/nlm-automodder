@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    JoshaParity（スイングの割り振り・リセットの検出）を組み立てる包み。設定は上流の JoshaParity.csproj に合わせる。
+    ソースはコピーせず、AutoModder の submodule（固定コミット）から <Compile Include> で取り込む。
+
+    Parser の扱いは AutoModder と同じにする:
+    - 組み立ては上流と同じく、JoshaParity に同梱の古い dll\Parser.dll を参照する
+      （JoshaParity 6a88301 のソースは古い Parser の形に合わせて書かれていて、新しい Parser では組み立てられない所がある）。
+    - その dll は出力へ写さない（Private=false）。実行時に読まれるのは beatleader-analyzer の submodule の Parser
+      （aa9a24d・BLMapCheck が参照する物）。AutoModder の本体もこの2つを1つの dll にまとめるので、実行時は新しい Parser を使う。
+      どちらも "Parser, Version=1.0.0.0, PublicKeyToken=null" なので、同じ部品として読まれる。
+    上流の JoshaParity.csproj の設定が変わったら、ここも合わせる。
+  -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disabled</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>1.3.3</Version>
+    <Company>Joshabi</Company>
+    <AssemblyName>JoshaParity</AssemblyName>
+    <RootNamespace>JoshaParity</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CS8600;CS8601;CS8602;CS8603;CS8604;CS8618;CS8619;CS8625;CS8629;CS0168;CS0219;CS0162;CS0414;CS0649;CS0169</NoWarn>
+    <Up>$(MSBuildThisFileDirectory)..\..\..\external\ChroMapper-AutoModder\SubModule\JoshaParity\JoshaParity\</Up>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(Up)**\*.cs" Exclude="$(Up)Program.cs;$(Up)obj\**;$(Up)bin\**" Link="upstream\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Parser">
+      <HintPath>$(Up)dll\Parser.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

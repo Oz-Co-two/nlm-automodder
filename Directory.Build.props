@@ -1,0 +1,14 @@
+<Project>
+  <!--
+    このリポジトリ配下の全プロジェクト（external/ の上流の csproj も含む）に効く設定。
+    - 配布する dll にビルドした PC のフォルダのパスが埋め込まれないようにする
+      （既定ではデバッグ情報の置き場所として、ビルドした場所の絶対パスが dll に書き込まれる）。
+    - obj/bin をリポジトリ直下の build/ にまとめる（上流の submodule の中に作らない＝submodule を汚さない）。
+  -->
+  <PropertyGroup>
+    <DebugType>none</DebugType>
+    <PathMap>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))=/_/</PathMap>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)build\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)build\bin\$(MSBuildProjectName)\</BaseOutputPath>
+  </PropertyGroup>
+</Project>

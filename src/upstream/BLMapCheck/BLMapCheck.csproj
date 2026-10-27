@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    AutoModder の判定の部分（BLMapCheck）を組み立てる包み。設定は上流の BLMapCheck.csproj に合わせる。
+    ソースはコピーせず、AutoModder の submodule（固定コミット）から <Compile Include> で取り込む。
+    上流の csproj を直接使わないのは、(1) Analyzer.dll・JoshaParity.dll を上流の obj フォルダの決まった場所から読む
+    （先に別に組み立てておく前提）、(2) 組み立ての後に ChroMapper のフォルダへ xcopy する、の2つがあるため。
+    上流の BLMapCheck.csproj の設定・部品が変わったら、ここも合わせる。
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>BLMapCheck</RootNamespace>
+    <AssemblyName>BLMapCheck</AssemblyName>
+    <OutputType>Library</OutputType>
+    <Deterministic>true</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CS8632;CS0168;CS0219;CS0162;CS0414;CS0649;CS0169;CS1998</NoWarn>
+    <Up>$(MSBuildThisFileDirectory)..\..\..\external\ChroMapper-AutoModder\BLMapCheck\</Up>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(Up)**\*.cs" Exclude="$(Up)obj\**;$(Up)bin\**;$(Up)beatleader-analyzer\**;$(Up)beatleader-parser\**;$(Up)JoshaParity\**" Link="upstream\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\external\ChroMapper-AutoModder\SubModule\beatleader-analyzer\Parser\beatleader-parser\Parser.csproj" />
+    <ProjectReference Include="..\Analyzer\Analyzer.csproj" />
+    <ProjectReference Include="..\JoshaParity\JoshaParity.csproj" />
+  </ItemGroup>
+
+</Project>

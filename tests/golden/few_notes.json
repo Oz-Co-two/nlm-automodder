@@ -1,0 +1,172 @@
+{
+ "automodder": {
+  "version": "1.6.6",
+  "commit": "0c2621507170c427506297457c8abdef7765dad1",
+  "parts": {
+   "beatleader-analyzer": "078615b7f99c38c96bb33261e19894572b22851e",
+   "beatleader-parser": "aa9a24da419afd5aa210c365d9b3d65a19593d7e",
+   "JoshaParity": "6a88301558d69691a80dcdd5dc4768152a6c4362"
+  }
+ },
+ "results": [
+  {
+   "name": "Song Name",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The song name field is not empty",
+   "objects": [],
+   "data": {
+    "SongNameLength": "8"
+   }
+  },
+  {
+   "name": "Song SubName",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "Tags were not found in the Song Name or Song Author field",
+   "objects": [],
+   "data": {
+    "SubName": "Success"
+   }
+  },
+  {
+   "name": "Song Author",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The song author field is not empty",
+   "objects": [],
+   "data": {
+    "SongAuthorLength": "2"
+   }
+  },
+  {
+   "name": "Creator",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The creator field is not empty and is not too long",
+   "objects": [],
+   "data": {
+    "CreatorLength": "2"
+   }
+  },
+  {
+   "name": "Song Time Offset",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The song time offset is 0",
+   "objects": [],
+   "data": {
+    "SongTimeOffset": "0"
+   }
+  },
+  {
+   "name": "BPM",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Inconclusive",
+   "checkType": "SongInfo",
+   "description": "The maps BPM must be set to the song BPM or a multiple of it. This cannot be automatically detected currently",
+   "objects": [],
+   "data": {
+    "BPM": "Could not be found"
+   }
+  },
+  {
+   "name": "Difficulty Ordering",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "Difficulty ordering is correct",
+   "objects": [],
+   "data": {
+    "CurrentOrder": ""
+   }
+  },
+  {
+   "name": "Song Preview",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The song preview has been set",
+   "objects": [],
+   "data": {
+    "PreviewStartTime": "20",
+    "PreviewDuration": "10"
+   }
+  }
+ ],
+ "criteria": {
+  "info": {
+   "SongName": "Success",
+   "SubName": "Success",
+   "SongAuthor": "Success",
+   "Creator": "Success",
+   "Offset": "Success",
+   "BPM": "Warning",
+   "DifficultyOrdering": "Success",
+   "Preview": "Success"
+  },
+  "diff": {
+   "Standard": {
+    "Hard": {
+     "difficultyRank": 5,
+     "filename": "HardStandard.dat",
+     "notes": null,
+     "skipped": "notLoaded",
+     "highest": null,
+     "crit": null
+    },
+    "ExpertPlus": {
+     "difficultyRank": 9,
+     "filename": "ExpertPlusStandard.dat",
+     "notes": 10,
+     "skipped": "tooFewNotes",
+     "highest": "Fail",
+     "crit": {
+      "HotStart": "Fail",
+      "ColdEnd": "Fail",
+      "MinSongDuration": "Fail",
+      "Outside": "Fail",
+      "ProlongedSwing": "Fail",
+      "VisionBlock": "Fail",
+      "Parity": "Fail",
+      "Chain": "Fail",
+      "FusedObject": "Fail",
+      "Loloppe": "Fail",
+      "HandClap": "Fail",
+      "SwingPath": "Fail",
+      "Hitbox": "Fail",
+      "Slider": "Fail",
+      "Wall": "Fail",
+      "Light": "Fail",
+      "DifficultyLabelSize": "Fail",
+      "DifficultyName": "Fail",
+      "Requirement": "Fail",
+      "NJS": "Fail"
+     }
+    }
+   }
+  }
+ },
+ "errors": []
+}

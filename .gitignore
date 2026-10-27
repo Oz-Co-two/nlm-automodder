@@ -1,0 +1,8 @@
+bin/
+obj/
+build/
+out/
+dist/
+tests/.out/
+__pycache__/
+*.user

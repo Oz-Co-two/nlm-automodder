@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    nlm-automodder: AutoModder（ChroMapper のプラグイン）の自動の確かめ（BLMapCheck）をそのまま動かす CLI。
+    上流のソースはコピーせず、external/ChroMapper-AutoModder の submodule（固定コミット）を src/upstream/ の包みの csproj から取り込む。
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>nlm-automodder</AssemblyName>
+    <RootNamespace>NlmAutoModder</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- 数の書き方（小数点など）を PC の地域の設定に左右させない。AutoModder の文の中の数も「.」で出る -->
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- PublishTrimmed はコマンドラインで渡すと netstandard の部品にも伝わって失敗するので、ここで NlmTrim から決める（build.py が -p:NlmTrim=partial を渡す） -->
+    <PublishTrimmed Condition="'$(NlmTrim)' != ''">true</PublishTrimmed>
+    <TrimMode Condition="'$(NlmTrim)' != ''">$(NlmTrim)</TrimMode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="upstream\BLMapCheck\BLMapCheck.csproj" />
+  </ItemGroup>
+
+</Project>

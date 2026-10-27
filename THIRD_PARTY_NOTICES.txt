@@ -1,0 +1,72 @@
+nlm-automodder には以下の第三者ソフトウェアが含まれています。
+This software includes the following third-party components.
+
+nlm-automodder は AutoModder・BeatLeader の公式ツールではありません。AutoModder（ChroMapper のプラグイン）の
+自動の確かめの部分（BLMapCheck）を改変せずに組み立て、ChroMapper の外で動かしています。結果は AutoModder の
+既定の設定の物で、BeatLeader のランクの審査の結果ではありません。
+nlm-automodder is NOT an official AutoModder or BeatLeader tool. It builds AutoModder's
+auto-check library (BLMapCheck) from unmodified source and runs it outside ChroMapper,
+with AutoModder's default settings. Results are not BeatLeader ranking decisions.
+
+------------------------------------------------------------------------------
+1. ChroMapper-AutoModder  (https://github.com/LightAi39/ChroMapper-AutoModder)
+   v1.6.6 (commit 0c26215). BLMapCheck.dll — the auto-check library.
+   MIT License — Copyright (c) 2023 Light Ai
+   (BLMapCheck: Light Ai & Loloppe)
+
+   BLMapCheck contains / is based on:
+   a. ProfanityFilter — ProfanityDetector by Stephen Haunts
+      (https://github.com/stephenhaunts/ProfanityDetector)
+      MIT License — Copyright (c) 2019 (the source file header names no holder)
+   b. Parts of the check logic are based on BeatSaber-MapCheck
+      (https://github.com/KivalEvan/BeatSaber-MapCheck)
+      MIT License — Copyright (c) 2021 Kival Evan
+
+2. beatleader-analyzer  (https://github.com/BeatLeader/beatleader-analyzer)
+   Commit 078615b (the version AutoModder v1.6.6 uses). Analyzer.dll — Pass / Tech rating.
+   MIT License (the LICENSE file names no copyright holder; attributed to BeatLeader).
+   Based on LackWiz's Tech_Calculator (https://github.com/LackWiz/ppCurve).
+   Analyzer.dll also contains polyfill code generated at build time by
+   PolySharp (https://github.com/Sergio0694/PolySharp)
+   MIT License — Copyright (c) 2023 Sergio Pedri
+
+3. beatleader-parser  (https://github.com/BeatLeader/beatleader-parser)
+   Commit aa9a24d. Parser.dll — map loading.
+   MIT License (the LICENSE file names no copyright holder; attributed to BeatLeader).
+
+4. JoshaParity  (https://github.com/Loloppe/JoshaParity, originally https://github.com/Joshabi/JoshaParity)
+   Commit 6a88301. JoshaParity.dll — swing / parity analysis.
+   MIT License — Copyright (c) 2023 Joshabi
+
+5. Json.NET (Newtonsoft.Json) 13.0.3  (https://www.newtonsoft.com/json)
+   Newtonsoft.Json.dll — used by BLMapCheck.
+   MIT License — Copyright (c) 2007 James Newton-King
+
+6. NVorbis 0.10.5  (https://github.com/NVorbis/NVorbis)
+   NVorbis.dll — used by beatleader-parser.
+   MIT License — Copyright (c) 2020 Andrew Ward
+
+7. .NET Runtime  (https://github.com/dotnet/runtime)
+   MIT License — Copyright (c) .NET Foundation and Contributors.
+   Its own third-party notices are in DOTNET_THIRD_PARTY_NOTICES.txt.
+
+------------------------------------------------------------------------------
+All of the above are distributed under the MIT License:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

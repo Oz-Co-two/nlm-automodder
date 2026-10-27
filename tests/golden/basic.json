@@ -1,0 +1,458 @@
+{
+ "automodder": {
+  "version": "1.6.6",
+  "commit": "0c2621507170c427506297457c8abdef7765dad1",
+  "parts": {
+   "beatleader-analyzer": "078615b7f99c38c96bb33261e19894572b22851e",
+   "beatleader-parser": "aa9a24da419afd5aa210c365d9b3d65a19593d7e",
+   "JoshaParity": "6a88301558d69691a80dcdd5dc4768152a6c4362"
+  }
+ },
+ "results": [
+  {
+   "name": "Song Name",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The song name field is not empty",
+   "objects": [],
+   "data": {
+    "SongNameLength": "8"
+   }
+  },
+  {
+   "name": "Song SubName",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "Tags were not found in the Song Name or Song Author field",
+   "objects": [],
+   "data": {
+    "SubName": "Success"
+   }
+  },
+  {
+   "name": "Song Author",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The song author field is not empty",
+   "objects": [],
+   "data": {
+    "SongAuthorLength": "2"
+   }
+  },
+  {
+   "name": "Creator",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The creator field is not empty and is not too long",
+   "objects": [],
+   "data": {
+    "CreatorLength": "2"
+   }
+  },
+  {
+   "name": "Song Time Offset",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The song time offset is 0",
+   "objects": [],
+   "data": {
+    "SongTimeOffset": "0"
+   }
+  },
+  {
+   "name": "BPM",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Inconclusive",
+   "checkType": "SongInfo",
+   "description": "The maps BPM must be set to the song BPM or a multiple of it. This cannot be automatically detected currently",
+   "objects": [],
+   "data": {
+    "BPM": "Could not be found"
+   }
+  },
+  {
+   "name": "Difficulty Ordering",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "Difficulty ordering is correct",
+   "objects": [],
+   "data": {
+    "CurrentOrder": "40.95864036947557"
+   }
+  },
+  {
+   "name": "Song Preview",
+   "characteristic": null,
+   "difficulty": null,
+   "difficultyRank": null,
+   "severity": "Passed",
+   "checkType": "SongInfo",
+   "description": "The song preview has been set",
+   "objects": [],
+   "data": {
+    "PreviewStartTime": "20",
+    "PreviewDuration": "10"
+   }
+  },
+  {
+   "name": "Hot Start",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Duration",
+   "description": "There is at least 1.5 seconds of time before any interactable objects",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Cold End",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Duration",
+   "description": "There is at least 2 seconds of time after the last interactable object",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Outside",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Outside",
+   "description": "No object detected outside of the playable length",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Mapped Duration",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Duration",
+   "description": "The map from first note to last note must be at least 45 seconds in length.",
+   "objects": [],
+   "data": {
+    "MappedDuration": "64s",
+    "MinimumDuration": "45s"
+   }
+  },
+  {
+   "name": "Difficulty Label Size",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Label",
+   "description": "The difficulty label size is valid",
+   "objects": [],
+   "data": {
+    "CurrentSize": "Default",
+    "MaxSize": "30 characters"
+   }
+  },
+  {
+   "name": "Difficulty Label Name",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Label",
+   "description": "The label name does not contain any obscene content",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Slider Precision",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Slider",
+   "description": "No issue with slider precision detected",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Fused Object",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Fused",
+   "description": "No fused objects detected",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Wall",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Wall",
+   "description": "No issue with hidden objects, movement, wall size and duration detected",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Wall Dodge",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Wall",
+   "description": "No issue with dodge wall found",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Chain",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Chain",
+   "description": "Chains are all proper",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Parity",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Parity",
+   "description": "No possible parity issue detected",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Vision Block",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Vision",
+   "description": "No issue with vision from notes and bombs detected",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Chain Duration",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Chain",
+   "description": "Chains duration are under 150% the average effective slider duration",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Chain Head",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Chain",
+   "description": "All chains in the map have an head note",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Dot Spam",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Swing",
+   "description": "Map doesn't have any prolonged swing duration",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Loloppe",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Loloppe",
+   "description": "No parallel notes of the same color on the same swing detected",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Swing Path",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Swing",
+   "description": "No issue with swing path detected",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Staircase",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Staircase",
+   "description": "No hitbox issue detected",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Hand Clap",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Handclap",
+   "description": "No handclap pattern detected",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Light",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Light",
+   "description": "Map has enough light per beat in average",
+   "objects": [],
+   "data": {
+    "CurrentAvgLightPerBeat": "2",
+    "RequiredAvgLightPerBeat": "1"
+   }
+  },
+  {
+   "name": "Bomb Lit",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Light",
+   "description": "Bombs in the map are properly lit",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Requirements",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "Requirements",
+   "description": "Map doesn't have any mod requirement",
+   "objects": [],
+   "data": {
+    "Requirements": "None"
+   }
+  },
+  {
+   "name": "Note Jump Speed",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Passed",
+   "checkType": "NoteJumpSpeed",
+   "description": "No issue with NJS detected.",
+   "objects": [],
+   "data": {}
+  },
+  {
+   "name": "Statistical Data",
+   "characteristic": "Standard",
+   "difficulty": "ExpertPlus",
+   "difficultyRank": 9,
+   "severity": "Data",
+   "checkType": "Statistics",
+   "description": "Statistical data of the difficulty",
+   "objects": [],
+   "data": {
+    "Pass": "1.11",
+    "Tech": "0.14",
+    "EBPM": "57.28",
+    "PEBPM": "60",
+    "SPS": "3.09",
+    "Handness": "50/50",
+    "Duration": "31.25"
+   }
+  }
+ ],
+ "criteria": {
+  "info": {
+   "SongName": "Success",
+   "SubName": "Success",
+   "SongAuthor": "Success",
+   "Creator": "Success",
+   "Offset": "Success",
+   "BPM": "Warning",
+   "DifficultyOrdering": "Success",
+   "Preview": "Success"
+  },
+  "diff": {
+   "Standard": {
+    "ExpertPlus": {
+     "difficultyRank": 9,
+     "filename": "ExpertPlusStandard.dat",
+     "notes": 198,
+     "skipped": null,
+     "highest": "Success",
+     "crit": {
+      "HotStart": "Success",
+      "ColdEnd": "Success",
+      "MinSongDuration": "Success",
+      "Outside": "Success",
+      "ProlongedSwing": "Success",
+      "VisionBlock": "Success",
+      "Parity": "Success",
+      "Chain": "Success",
+      "FusedObject": "Success",
+      "Loloppe": "Success",
+      "HandClap": "Success",
+      "SwingPath": "Success",
+      "Hitbox": "Success",
+      "Slider": "Success",
+      "Wall": "Success",
+      "Light": "Success",
+      "DifficultyLabelSize": "Success",
+      "DifficultyName": "Success",
+      "Requirement": "Success",
+      "NJS": "Success"
+     }
+    }
+   }
+  }
+ },
+ "errors": []
+}

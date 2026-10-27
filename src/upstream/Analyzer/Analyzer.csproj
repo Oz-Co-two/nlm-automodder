@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    beatleader-analyzer（★の Pass/Tech の計算）を AutoModder と同じ netstandard2.1 で組み立てる包み。
+    ソースはコピーせず、AutoModder の submodule（固定コミット）から <Compile Include> で取り込む。
+    設定は上流の Analyzer.csproj に合わせる（上流は net9.0;netstandard2.1 の2つを作るが、AutoModder が使うのは netstandard2.1 の方）。
+    上流の csproj を直接参照しないのは、net10.0 の exe から参照すると net9.0 の方が選ばれ、AutoModder と違う分岐
+    （Performance.cs の #if NETSTANDARD2_0_OR_GREATER）を通るため。
+    上流の Analyzer.csproj の設定・部品が変わったら、ここも合わせる。
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>beatleader_analyzer</RootNamespace>
+    <AssemblyName>Analyzer</AssemblyName>
+    <LangVersion>preview</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CS8632;CS0168;CS0219;CS0162;CS0414;CS0649;CS0169;CS1998</NoWarn>
+    <Up>$(MSBuildThisFileDirectory)..\..\..\external\ChroMapper-AutoModder\SubModule\beatleader-analyzer\beatleader-analyzer\</Up>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(Up)**\*.cs" Exclude="$(Up)obj\**;$(Up)bin\**" Link="upstream\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PolySharp" Version="1.13.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+    <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\external\ChroMapper-AutoModder\SubModule\beatleader-analyzer\Parser\beatleader-parser\Parser.csproj" />
+  </ItemGroup>
+
+</Project>
