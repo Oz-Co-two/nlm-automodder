@@ -1,14 +1,17 @@
 """nlm-automodder の配布物を作る。
 
   python build.py            → dist/nlm-automodder-<版>-win-x64.zip と dist/manifest.json
+  python build.py notes <manifest.json>
+                             → 公開済みの版の manifest.json の更新内容（notes）だけを今の CHANGELOG で作り直す（zip の項目はそのまま）
 
-手順: submodule が固定コミットのままか・src/Program.cs の AutoModder の版と同じかを確かめる
+手順: CHANGELOG の確認 → submodule が固定コミットのままか・src/Program.cs の AutoModder の版と同じかを確かめる
 → 空のフォルダへ自己完結・win-x64・TrimMode=partial で発行 → 不要物(.pdb/.xml/.lib)を除く
 → ライセンス類と plugin.json を入れる → ビルドした PC のパスが入っていないかを調べる → 簡単な動作確認 → zip と manifest。
 manifest.json は GitHub Releases に zip と一緒に添付する。NLM はこれを読んで版・protocol を判定し、
-zip の SHA-256 を照合してから展開する（nlm-rating と同じ形）。
+zip の SHA-256 を照合してから展開する（nlm-rating と同じ形）。manifest.json の notes（版ごとの CHANGELOG の見出し）は、
+NLM の更新のお知らせに出る。
 
-版番号は src/Program.cs の Version が唯一の定義元。
+版番号は src/Program.cs の Version が唯一の定義元。CHANGELOG.md / CHANGELOG.en.md の先頭の版もこれと同じにする。
 """
 import hashlib, json, os, re, shutil, subprocess, sys, zipfile
 from pathlib import Path
@@ -36,6 +39,58 @@ def run(cmd, **kw):
 
 def git(*args, cwd=ROOT):
     return subprocess.run(['git', *args], cwd=cwd, check=True, capture_output=True, text=True, encoding='utf-8').stdout.strip()
+
+
+def headline(line):
+    """'- **見出し**（補足）' → '見出し'。リンク・コードの記号は外す（NLM の tools/make_release.py と同じ）"""
+    m = re.match(r'- \*\*(.+?)\*\*', line)
+    if not m:
+        return None
+    s = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', m.group(1))
+    return s.replace('`', '').strip()
+
+
+def parse_changelog(path):
+    """[(版, [見出し…]), …]（書かれた順＝新しい順）。版は「## v0.1.0」の 0.1.0"""
+    out = []
+    for line in path.read_text(encoding='utf-8').splitlines():
+        m = re.fullmatch(r'## v(\d+\.\d+\.\d+)\s*', line)
+        if m:
+            out.append((m.group(1), []))
+        elif out and (h := headline(line)):
+            out[-1][1].append(h)
+    if not out:
+        sys.exit(f'{path.name} に「## v〇.〇.〇」の見出しがありません')
+    return out
+
+
+def build_notes(ver, top=True):
+    """manifest.json の更新内容（NLM の更新のお知らせに出す）。CHANGELOG.md / CHANGELOG.en.md の版ごとの、行頭の太字（- **〜**）。
+    top=True は CHANGELOG の先頭の版が ver であることを求める（新しい版を作る時）。False は ver までの版だけを使う（公開済みの版の manifest を作り直す時）"""
+    ja, en = parse_changelog(ROOT / 'CHANGELOG.md'), parse_changelog(ROOT / 'CHANGELOG.en.md')
+    if [v for v, _ in ja] != [v for v, _ in en]:
+        sys.exit(f'CHANGELOG.md と CHANGELOG.en.md の版の並びが違います\n  ja: {[v for v, _ in ja]}\n  en: {[v for v, _ in en]}')
+    if top and ja[0][0] != ver:
+        sys.exit(f'CHANGELOG の先頭の版（{ja[0][0]}）が src/Program.cs の Version（{ver}）と違います')
+    vt = lambda v: tuple(int(x) for x in v.split('.'))
+    notes = []
+    for (v, hj), (_, he) in zip(ja, en):
+        if len(hj) != len(he) or not hj:
+            sys.exit(f'v{v}: 太字の見出しの数が日英で違うか、ありません（ja {len(hj)} / en {len(he)}）')
+        if vt(v) <= vt(ver):
+            notes.append({'version': v, 'ja': hj, 'en': he})
+    if not notes or notes[0]['version'] != ver:
+        sys.exit(f'CHANGELOG に v{ver} がありません')
+    return notes
+
+
+def renote(path):
+    """公開済みの版の manifest.json（GitHub のリリースから取った物）の更新内容だけを、今の CHANGELOG で作り直す（zip の項目はそのまま）"""
+    p = Path(path)
+    m = json.loads(p.read_text(encoding='utf-8'))
+    m['notes'] = build_notes(m['version'], top=False)
+    p.write_text(json.dumps(m, indent=1, ensure_ascii=False), encoding='utf-8')
+    print(f'{p}: 更新内容 {len(m["notes"])} 版分')
 
 
 def read_consts():
@@ -125,6 +180,7 @@ def main():
     ver, proto = c['Version'], int(c['Protocol'])
     if not re.fullmatch(r'\d+\.\d+\.\d+', ver):
         sys.exit(f'版番号の形式が不正です: {ver}')
+    notes = build_notes(ver)
     ups = upstream_commits(c)
     name = f'nlm-automodder-{ver}-{RID}'
     pub = ROOT / 'out' / name
@@ -152,11 +208,14 @@ def main():
             if f.is_file():
                 z.write(f, f.relative_to(pub).as_posix())
     data = zpath.read_bytes()
-    manifest = {**meta, 'zip': {'name': zpath.name, 'size': len(data), 'sha256': hashlib.sha256(data).hexdigest()}}
-    (DIST / 'manifest.json').write_text(json.dumps(manifest, indent=1), encoding='utf-8')
+    manifest = {**meta, 'zip': {'name': zpath.name, 'size': len(data), 'sha256': hashlib.sha256(data).hexdigest()}, 'notes': notes}
+    (DIST / 'manifest.json').write_text(json.dumps(manifest, indent=1, ensure_ascii=False), encoding='utf-8')
     print(f'\n{zpath}  {len(data) / 1e6:.1f}MB\n{DIST / "manifest.json"}')
     print('展開後のサイズ: %.1fMB' % (sum(f.stat().st_size for f in pub.rglob('*') if f.is_file()) / 1e6))
 
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) > 2 and sys.argv[1] == 'notes':
+        renote(sys.argv[2])
+    else:
+        main()

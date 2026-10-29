@@ -23,8 +23,9 @@ NLM 本体には同梱していません。必要な人だけが取り込みま�
   結果を曲の情報 → 難易度ごとに、重い順（Unrankable → Questionable → …）に出します。拍をクリックすると、その位置へ移動します。
   - 譜面が前回確かめた時のままなら動かし直しません（「↻ もう一度確かめる」で動かし直せます）。
   - AutoModder は曲の長さを使うので、音源を読み込んでいない時は確かめられません。
-- **更新**: タブの「更新を確認」を押した時だけ GitHub を見に行きます（自動では確認しません）。古い版は残るので、
-  取り込み済みの版が 2 つ以上あれば、タブの版の選択から元に戻せます。
+- **更新**: タブの「更新を確認」を押した時に GitHub を見に行きます。NLM v2.1.1-oz 以降は、取り込み済みなら NLM の起動時にも確かめ、
+  新しい版があれば変更点（[CHANGELOG.md](CHANGELOG.md) の見出し）を出して知らせます（NLM の環境設定「起動時に…確認する」で止められます）。
+  古い版は残るので、取り込み済みの版が 2 つ以上あれば、タブの版の選択から元に戻せます。
 - **ネットに繋がらない PC で使う**: Releases の zip を展開した中身を、NLM のフォルダの `plugins/automodder/<版>/`（例: `plugins/automodder/0.1.0/`）に置きます。
 - **削除**: NLM のフォルダの `plugins/automodder/` を消します。
 - **単体で使う**: `nlm-automodder.exe < 入力.json > 結果.json`（入出力は下）。
@@ -147,10 +148,13 @@ python tests/run_tests.py out/nlm-automodder-<版>-win-x64/nlm-automodder.exe
 
 ## リリース
 
-1. `src/Program.cs` の `Version` を上げる（入出力の形を変えたら `Protocol` も）
+1. `src/Program.cs` の `Version` を上げる（入出力の形を変えたら `Protocol` も）。変更点を `CHANGELOG.md` と `CHANGELOG.en.md` に
+   同じ版・同じ数の太字の見出し（`- **〜**`）で書く（`build.py` が manifest.json の `notes` に入れ、NLM の更新のお知らせに出る。合わないと止まる）
 2. `python build.py` → `python tests/run_tests.py out/nlm-automodder-<版>-win-x64/nlm-automodder.exe`
 3. タグ `v<版>` で GitHub Release を作り、**zip と manifest.json の両方**を添付する。
    NLM は `releases/latest/download/manifest.json` を読み、zip の SHA-256 を照合してから展開します（nlm-rating と同じ）。
+   公開した後に変更点の文だけを直す時は、リリースの manifest.json を落として `python build.py notes manifest.json` で作り直し、
+   `gh release upload v<版> manifest.json --clobber` で差し替えます（zip の項目は変わらない）。
 4. 公開は**プラグインのリリースが先、それを使う NLM の版が後**。
 
 ## AutoModder の版が上がった時の追い方
